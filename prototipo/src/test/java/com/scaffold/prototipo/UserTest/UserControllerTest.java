@@ -14,11 +14,19 @@ public class UserControllerTest {
 
     @Autowired
     UserController userController;
+
     @Test
     public void createUser(){
         ResponseEntity<String> response= userController.createUserController(new User());
         assertEquals("usuario fue creado con exito", response.getBody());
         assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+    
+    @Test
+    public void createUserWrong(){
+        ResponseEntity<String> response= userController.createUserController(null);
+        assertEquals("usuario no fue creado con exito", response.getBody());
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 
 }
